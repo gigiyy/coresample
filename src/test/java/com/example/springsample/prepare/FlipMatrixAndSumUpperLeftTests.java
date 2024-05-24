@@ -22,8 +22,9 @@ public class FlipMatrixAndSumUpperLeftTests {
         // Write your code here
         int n = matrix.size();
         int sum = 0;
-        // the for each element of the upper left corner,
-        // they can be swap freely with other elements of below positions
+        // for each element from the upper left corner,
+        // they can be swapped freely with other elements in below positions
+        // (they from a square inside the matrix)
         // (i, j), (i, n - 1 - j), (n - 1 - i, j), (n - 1- i, n - 1 -j)
         for (int i = 0; i < n / 2; i++)
             for (int j = 0; j < n / 2; j++)
