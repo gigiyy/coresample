@@ -10,16 +10,20 @@ public class RenameFileTests {
 
     @Test
     public void test() {
-        assertThat(renameFileFast("aba", "ababa")).isEqualTo(4);
+        assertThat(renameFile("aba", "ababa")).isEqualTo(4);
     }
 
     @Test
     public void testLoooog() {
-        int count = renameFileFast("mzb", "mmzzzzzzzzzzbbbbbzzzbbbbbbbbbbbbbzzzzzzzzzzzbbbbbbbbbbbbbbbbbbzzzzzzzzzzzzzzzbbbbbbbbbbbbbbbbbbbbbbbb");
+        int count = renameFile("mzb", "mmzzzzzzzzzzbbbbbzzzbbbbbbbbbbbbbzzzzzzzzzzzbbbbbbbbbbbbbbbbbbzzzzzzzzzzzzzzzbbbbbbbbbbbbbbbbbbbbbbbb");
         System.out.println(count);
     }
 
-    public int renameFileFast(String newName, String oldName) {
+    // since the new name is much shorter than old one
+    // so check the occurrences of the first character of the new name in old one,
+    // then count the ways to form the rest of new name in the sub string starting from
+    // each occurrence respectively and recursively
+    public int renameFile(String newName, String oldName) {
         log.info("in >>> newName: {}, oldName: {}", newName, oldName);
         if (newName.isEmpty()) return 0;
         char first = newName.charAt(0);
@@ -30,7 +34,7 @@ public class RenameFileTests {
         int index = oldName.indexOf(first);
         int count = 0;
         while (index < oldName.length() && index != -1) {
-            count += renameFileFast(newName.substring(1), oldName.substring(index + 1)) % mod;
+            count += renameFile(newName.substring(1), oldName.substring(index + 1)) % mod;
             index = oldName.indexOf(first, index + 1);
         }
         log.info("out << newName: {}, oldName: {}, count: {}", newName, oldName, count);
@@ -38,7 +42,8 @@ public class RenameFileTests {
     }
 
 
-    public int renameFile(String newName, String oldName) {
+    // using brute-force algorithm to check all possible combinations and it would be too slow for longer name
+    public int renameFileV1(String newName, String oldName) {
         // Write your code here
         int length = oldName.length();
         int count = 0;
