@@ -41,6 +41,7 @@ public class BreadFirstSearchTests {
         }
     }
 
+    // n: number of nodes; m: number of edges; s: starting node
     public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
         // Write your code here
         Graph graph = new Graph();
